@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in | Company Workforce</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="authPage">
+    <main class="authCard">
+        <p class="authEyebrow">COMPANY WORKFORCE</p>
+        <h1>Welcome back</h1>
+        <p class="muted">Sign in to access your workforce account.</p>
+
+        <div class="authTabs" role="tablist" aria-label="Account type">
+            <button type="button" class="authTab active" data-panel="adminPanel" role="tab" aria-selected="true">Admin</button>
+            <button type="button" class="authTab" data-panel="staffLoginPanel" role="tab" aria-selected="false">Staff login</button>
+            <button type="button" class="authTab" data-panel="staffSignupPanel" role="tab" aria-selected="false">Staff sign up</button>
+        </div>
+
+        <form id="adminPanel" class="authForm">
+            <label for="adminUsername">Admin username</label>
+            <input id="adminUsername" name="username" autocomplete="username" required>
+            <label for="adminPassword">Password</label>
+            <input id="adminPassword" name="password" type="password" autocomplete="current-password" required>
+            <button type="submit">Log in as admin</button>
+        </form>
+
+        <form id="staffLoginPanel" class="authForm" hidden>
+            <label for="staffLoginEmail">Work email</label>
+            <input id="staffLoginEmail" name="email" type="email" autocomplete="username" required>
+            <label for="staffLoginPassword">Password</label>
+            <div class="passwordField">
+                <input id="staffLoginPassword" name="password" type="password" autocomplete="current-password" required>
+                <button class="passwordToggle" type="button" aria-controls="staffLoginPassword" aria-pressed="false">Show</button>
+            </div>
+            <button type="submit">Log in as staff</button>
+        </form>
+
+        <form id="staffSignupPanel" class="authForm" hidden>
+            <label for="staffSignupEmail">Work email</label>
+            <input id="staffSignupEmail" name="email" type="email" autocomplete="email" required>
+            <p class="muted">Use the same work email already listed in your staff record.</p>
+            <label for="staffSignupPassword">Create password</label>
+            <div class="passwordField">
+                <input id="staffSignupPassword" name="password" type="password" minlength="12" maxlength="128" autocomplete="new-password" required>
+                <button class="passwordToggle" type="button" aria-controls="staffSignupPassword" aria-pressed="false">Show</button>
+            </div>
+            <p class="muted">Use 12 to 128 characters.</p>
+            <button type="submit">Create staff account</button>
+        </form>
+
+        <p id="authStatus" class="muted" role="status" aria-live="polite"></p>
+    </main>
+    <script src="auth-page.js"></script>
+</body>
+</html>

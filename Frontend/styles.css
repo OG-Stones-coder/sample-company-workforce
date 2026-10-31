@@ -1,0 +1,263 @@
+body{
+    padding: 30px;
+    background-color: #f2f5fa;
+    font-family: Arial, sans-serif;
+    min-width: 360px;
+}
+body[hidden], [hidden]{
+    display: none !important;
+}
+.accountBar{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 14px;
+}
+.accountBar p{
+    margin: 0;
+}
+.accountBar button{
+    background: #ffffff24;
+    border: 1px solid #ffffff80;
+}
+.authPage{
+    min-height: 100vh;
+    box-sizing: border-box;
+    display: grid;
+    place-items: center;
+}
+.authCard{
+    box-sizing: border-box;
+    width: min(100%, 460px);
+    padding: 32px;
+    border-radius: 18px;
+    background: white;
+    box-shadow: 0 6px 24px #17284123;
+}
+.authCard h1{
+    margin: 0 0 8px;
+}
+.authEyebrow{
+    color: #2456a6;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+}
+.authTabs{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin: 24px 0;
+}
+.authTab{
+    padding: 10px 6px;
+    color: #2456a6;
+    background: #edf2fa;
+}
+.authTab.active{
+    color: white;
+    background: #2456a6;
+}
+.authForm{
+    display: grid;
+    gap: 10px;
+}
+.authForm label{
+    font-weight: 600;
+}
+.authForm .muted{
+    margin: 0 0 8px;
+    font-size: 13px;
+}
+.passwordField{
+    display: flex;
+    gap: 8px;
+}
+.passwordField input{
+    min-width: 0;
+}
+.passwordToggle{
+    flex: 0 0 72px;
+    color: #2456a6;
+    background: #edf2fa;
+}
+#authStatus:empty{
+    display: none;
+}
+.hero{
+    background: conic-gradient(from 90deg, #62728a, #2456a6, #c8d3e2);
+    color: whitesmoke;
+    box-shadow: 0 6px 20px #17284106;
+    padding:40px;
+    border-radius: 18px;
+    margin-bottom: 30px;
+}
+.hero p:first-child, .formTitle span, .records > span{
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+}
+.muted{
+    color: #62728a;
+}
+#workerForm{
+    background-color: white;
+    width: min(100%, 520px);
+    box-sizing: border-box;
+    padding: 25px;
+    box-shadow: 0 6px 20px #17284123;
+    border-radius: 18px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+.formTitle{
+    grid-column: 1 / -1;
+}
+.group{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.profilePhotoGroup{
+    grid-column: 1 / -1;
+}
+.profilePhotoHint{
+    margin: 0;
+    font-size: 13px;
+}
+.profilePicturePreview, .profilePicture{
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.profilePicturePreview{
+    border: 2px solid #c8d3e2;
+}
+.card .profilePicture{
+    display: block;
+    margin: 12px 0;
+}
+.profilePicture[hidden]{
+    display: none;
+}
+input{
+    box-sizing: border-box;
+    width: 100%;
+    background-color: #fafbfd;
+    padding: 12px 13px;
+    border: 1px solid #c8d3e2;
+    border-radius: 10px;
+}
+h2{
+    margin: 0;
+}
+.formTitle > .muted {
+    margin: 8px 0;
+}
+.workspace{
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+.records{
+    flex: 1;
+    min-width: 0;
+    padding: 25px;
+    background-color: white;
+    box-shadow: 0 6px 20px #17284106;
+    border-radius: 18px;
+}
+#staffRecords{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+}
+.card{
+    box-sizing: border-box;
+    min-height: 250px;
+    padding: 20px;
+    box-shadow: 0 6px 20px #17284123;
+    border-radius: 10px;
+    background-color: #fafbfd;
+}
+.card span{
+    font-weight: 900;
+}
+.card h3{
+    font-weight: 500;
+}
+.card button{
+    height: 40px;
+    padding: 10px 20px;
+    margin-right: 10px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+.edit{
+    background-color: #62728a;
+}
+.edit:hover{
+    background-color: #7d93b3;
+}
+.delete{
+    background-color: rgb(179, 2, 2);
+}
+.delete:hover{
+    background-color: rgb(235, 27, 27);
+}
+.formActions{
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 10px;
+}
+button{
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 10px;
+    color: white;
+    background-color: #2456a6;
+    cursor: pointer;
+}
+button:disabled{
+    opacity: .6;
+    cursor: wait;
+}
+#saveWorker:hover{
+    background-color: #3171d8;
+}
+#cancelEdit{
+    background-color: #62728a;
+}
+#recordsStatus:empty{
+    display: none;
+}
+@media (max-width: 800px){
+    body{
+        padding: 16px;
+    }
+    .hero{
+        padding: 28px;
+    }
+    .workspace{
+        flex-direction: column;
+    }
+    #workerForm, .records{
+        width: 100%;
+    }
+}
+@media (max-width: 480px){
+    .authCard{
+        padding: 22px;
+    }
+    #workerForm{
+        grid-template-columns: 1fr;
+    }
+    .formTitle, .profilePhotoGroup, .formActions{
+        grid-column: auto;
+    }
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Workforce</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body hidden>
+    <header class="hero">
+        <div class="accountBar">
+            <p id="accountInfo"></p>
+            <button id="logoutButton" type="button">Log out</button>
+        </div>
+        <p>workforce CRUD project</p>
+        <h1>Company workforce</h1>
+        <p>add a worker, keep details and manage your records. </p>
+    </header>
+
+    <div class="workspace">
+        <form id="workerForm">
+           <div class="formTitle">
+             <span>RECORD DETAILS</span>
+            <h2>Add a worker</h2>
+            <p class="muted">Complete all fields then save your record.</p>
+           </div>
+           <div class="group one">
+                <label for="workerName">Worker name</label>
+                <input id="workerName" name="name" type="text" placeholder="John Mark" required>
+           </div>
+           <div class="group">
+                <label for="workerEmail">Work email</label>
+                <input id="workerEmail" name="email" type="email" placeholder="john@company.com" required>
+           </div>
+           <div class="group two">
+                <label for="position">Position</label>
+                <input id="position" name="position" type="text" placeholder="Analyst" required>
+           </div>
+           <div class="group three">
+                <label for="salary">Salary</label>
+                <input id="salary" name="salary" type="number" min="0" step="0.01" placeholder="30000" required>
+           </div>
+           <div class="group four">
+                <label for="age">Age</label>
+                <input id="age" name="age" type="number" min="1" step="1" placeholder="26" required>
+           </div>
+           <div class="group five">
+                <label for="department">Department</label>
+                <input id="department" name="department" type="text" placeholder="Finance" required>
+           </div>
+           <div class="group profilePhotoGroup">
+                <label for="profilePicture">Profile picture <span aria-hidden="true">*</span></label>
+                <input id="profilePicture" name="profilePicture" type="file" accept="image/png,image/jpeg,image/gif,image/webp" required>
+                <img id="profilePicturePreview" class="profilePicturePreview" alt="Profile picture preview" hidden>
+                <p class="muted profilePhotoHint">Required. PNG, JPEG, GIF, or WebP. Maximum size: 2 MB.</p>
+           </div>
+           <div class="formActions">
+                <button id="saveWorker" type="submit">Add worker</button>
+                <button id="cancelEdit" type="button" hidden>Cancel edit</button>
+           </div>
+        </form>
+        <section class="records">
+            <span>YOUR DIRECTORY</span>
+            <h2>Worker Records</h2>
+            <p class="muted">Edit or remove a record below</p>
+            <p id="recordsStatus" class="muted" role="status"></p>
+            <div id="staffRecords"></div>
+        </section>
+        <template id="workerCard">
+            <article class="card">
+                <span class="recordLabel">WORKER RECORD</span>
+                <img class="profilePicture" alt="" hidden>
+                <h3 class="name"></h3>
+                <p class="email"></p>
+                <p class="position"></p>
+                <p class="salary"></p>
+                <p class="age"></p>
+                <p class="department"></p>
+                <button class="edit" type="button">Edit</button>
+                <button class="delete" type="button">Delete</button>
+            </article>
+
+        </template>
+    </div>
+<script src="auth-client.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
