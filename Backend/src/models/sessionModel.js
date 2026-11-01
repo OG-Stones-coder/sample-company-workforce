@@ -13,7 +13,10 @@ const sessionSchema = new mongoose.Schema({
     },
     staffId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Staff"
+        ref: "Staff",
+        required: function () {
+            return this.role === "staff";
+        }
     },
     expiresAt: {
         type: Date,

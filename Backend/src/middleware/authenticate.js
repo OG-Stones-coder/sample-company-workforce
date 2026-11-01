@@ -1,3 +1,4 @@
+import Staff from "../models/staffModel.js";
 import { createHash } from "node:crypto";
 import Session from "../models/sessionModel.js";
 
@@ -15,6 +16,17 @@ export const authenticate = async (req, res, next) => {
 
     if (!session) {
         return res.status(401).json({ message: "Your session has expired. Please log in again." });
+    }
+    if (session.role === "staff") {
+        const staffExists = await Staff.exists({ _id: session.staffId });
+
+        if (!staffExists) {
+            await Session.findByIdAndDelete(session._id);
+
+            return res.status(401).json({
+                message: "This staff account is no longer active."
+            });
+        }
     }
 
     req.auth = {

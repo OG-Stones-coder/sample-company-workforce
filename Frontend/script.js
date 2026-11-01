@@ -1,4 +1,4 @@
-const STAFF_API_URL = "http://localhost:5000/api/staff";
+const STAFF_API_URL = "https://sample-company-workforce.onrender.com/api/staff";
 const staffRecords = document.querySelector("#staffRecords");
 const workerCardTemplate = document.querySelector("#workerCard");
 const recordsStatus = document.querySelector("#recordsStatus");
@@ -222,7 +222,7 @@ window.authReady.then((user) => {
 
     document.querySelector("#logoutButton").addEventListener("click", async () => {
         try {
-            await window.authFetch("http://localhost:5000/api/auth/logout", { method: "POST" });
+            await window.authFetch("https://sample-company-workforce.onrender.com/api/auth/logout", { method: "POST" });
         } catch (error) {
             console.error("Failed to log out:", error);
         } finally {

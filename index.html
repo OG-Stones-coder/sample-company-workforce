@@ -2,10 +2,73 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=./Frontend/index.html">
+    <meta http-equiv="refresh" content="1; url=./Frontend/index.html">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Company Workforce</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            display: grid;
+            min-height: 100vh;
+            margin: 0;
+            place-items: center;
+            background: #f4f6f8;
+            color: #17212b;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        main {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .loader {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 1.5rem;
+            border: 4px solid #dce3e9;
+            border-top-color: #2563eb;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        h1 {
+            margin: 0 0 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        p {
+            margin: 0;
+            color: #64748b;
+        }
+
+        a {
+            color: #2563eb;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .loader {
+                animation-duration: 2s;
+            }
+        }
+    </style>
 </head>
 <body>
-    <p>Redirecting to Company Workforce...</p>
+    <main>
+        <div class="loader" role="status" aria-label="Loading"></div>
+        <h1>Opening Company Workforce</h1>
+        <p>Redirecting you now...</p>
+        <noscript><p><a href="./Frontend/index.html">Continue to Company Workforce</a></p></noscript>
+    </main>
 </body>
 </html>

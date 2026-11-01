@@ -1,4 +1,4 @@
-const AUTH_API_URL = "http://localhost:5000/api/auth";
+const AUTH_API_URL = "https://sample-company-workforce.onrender.com/api/auth";
 
 window.authReady = (async () => {
     const token = sessionStorage.getItem("workforceToken");

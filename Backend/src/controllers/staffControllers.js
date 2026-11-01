@@ -1,5 +1,7 @@
 
 import Staff from "../models/staffModel.js";
+import mongoose from "mongoose";
+import Session from "../models/sessionModel.js";
 
 const editableFields = ["name", "email", "position", "salary", "age", "department", "profilePicture"];
 
@@ -33,6 +35,11 @@ export const getStaff = async (req, res) => {
 };
 
 export const getStaffById = async (req, res) => {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+        return res.status(400).json({
+            message: "Invalid staff ID."
+        });
+    }
     if (req.auth.role === "staff" && req.auth.staffId !== req.params.id) {
         return res.status(403).json({ message: "You can only view your own staff record." });
     }
@@ -46,9 +53,21 @@ export const getStaffById = async (req, res) => {
 };
 
 export const updateStaff = async (req, res) => {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+        return res.status(400).json({
+            message: "Invalid staff ID."
+        });
+    }
     let staff;
+    const updates = pickEditableFields(req.body);
+
+        if (Object.keys(updates).length === 0) {
+            return res.status(400).json({
+                message: "Please provide at least one valid field to update."
+            });
+        }
     try {
-        staff = await Staff.findByIdAndUpdate(req.params.id, pickEditableFields(req.body), {
+        staff = await Staff.findByIdAndUpdate(req.params.id, updates, {
             new: true,
             runValidators: true
         });
@@ -67,11 +86,18 @@ export const updateStaff = async (req, res) => {
 };
 
 export const deleteStaff = async (req, res) => {
-    const staff = await Staff.findByIdAndDelete(req.params.id);
+    if (!mongoose.isValidObjectId(req.params.id)) {
+        return res.status(400).json({
+            message: "Invalid staff ID."
+        });
+    }
+    const staff = await Staff.findById(req.params.id);
 
     if (!staff) {
         return res.status(404).json({ message: "Staff not found" });
     }
+    await Session.deleteMany({ staffId: staff._id });
+    await Staff.findByIdAndDelete(staff._id);
 
-    res.status(200).json({ message: "Staff deleted", staff });
+    res.status(200).json({ message: "Staff deleted successfully." });
 };

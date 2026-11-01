@@ -9,7 +9,6 @@ const staffSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        sparse: true,
         lowercase: true,
         trim: true,
         match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -20,11 +19,14 @@ const staffSchema = new mongoose.Schema({
     },
     salary: {
         type: Number,
-        required: true
+        required: true,
+        min: 0
     },
     age: {
         type: Number,
-        required: true
+        required: true,
+        min: [18, "Staff must be at least 18 years old."],
+        max: 100
     },
     department: {
         type: String,
