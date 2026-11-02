@@ -5,10 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign in | Company Workforce</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="workforce-icon.png">
 </head>
 <body class="authPage">
+    <header class="hero">
+        <div class="headerBrand">
+            <img class="workforceLogo" src="workforce-icon.png" alt="">
+            <div>
+                <p class="headerEyebrow">COMPANY WORKFORCE</p>
+                <h1>Company Workforce</h1>
+                <p>Manage your team and workforce records.</p>
+            </div>
+        </div>
+    </header>
     <main class="authCard">
-        <p class="authEyebrow">COMPANY WORKFORCE</p>
         <h1>Welcome back</h1>
         <p class="muted">Sign in to access your workforce account.</p>
 
@@ -52,6 +62,13 @@
 
         <p id="authStatus" class="muted" role="status" aria-live="polite"></p>
     </main>
+    <div id="loadingOverlay" class="loadingOverlay" role="status" aria-live="polite" hidden>
+        <div class="loadingCard">
+            <span class="loadingSpinner" aria-hidden="true"></span>
+            <p id="loadingMessage">Please wait...</p>
+        </div>
+    </div>
+    <script src="loading.js"></script>
     <script src="auth-page.js"></script>
 </body>
 </html>

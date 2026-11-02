@@ -5,16 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Company Workforce</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="workforce-icon.png">
 </head>
-<body hidden>
+<body>
+    <div id="loadingOverlay" class="loadingOverlay" role="status" aria-live="polite">
+        <div class="loadingCard">
+            <span class="loadingSpinner" aria-hidden="true"></span>
+            <p id="loadingMessage">Checking your account...</p>
+        </div>
+    </div>
+    <div id="appContent" hidden>
     <header class="hero">
+        <div class="headerMain">
+            <div class="headerBrand">
+                <img class="workforceLogo" src="workforce-icon.png" alt="">
+                <div>
+                    <p class="headerEyebrow">COMPANY WORKFORCE</p>
+                    <h1>Company Workforce</h1>
+                    <p>Manage your team and workforce records.</p>
+                </div>
+            </div>
         <div class="accountBar">
             <p id="accountInfo"></p>
             <button id="logoutButton" type="button">Log out</button>
         </div>
-        <p>workforce CRUD project</p>
-        <h1>Company workforce</h1>
-        <p>add a worker, keep details and manage your records. </p>
+        </div>
     </header>
 
     <div class="workspace">
@@ -82,6 +97,8 @@
 
         </template>
     </div>
+    </div>
+<script src="loading.js"></script>
 <script src="auth-client.js"></script>
 <script src="script.js"></script>
 </body>

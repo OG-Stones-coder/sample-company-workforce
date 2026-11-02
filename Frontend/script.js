@@ -161,7 +161,9 @@ workerForm.addEventListener("submit", async (event) => {
         : STAFF_API_URL;
 
     saveWorkerButton.disabled = true;
-    recordsStatus.textContent = editingWorkerId ? "Saving changes..." : "Adding worker...";
+    const loadingMessage = editingWorkerId ? "Saving profile changes..." : "Creating worker profile...";
+    recordsStatus.textContent = loadingMessage;
+    window.loadingIndicator.show(loadingMessage);
 
     try {
         await requestStaff(url, {
@@ -176,6 +178,7 @@ workerForm.addEventListener("submit", async (event) => {
         recordsStatus.textContent = error.message;
         console.error("Failed to save worker record:", error);
     } finally {
+        window.loadingIndicator.hide();
         saveWorkerButton.disabled = false;
     }
 });
@@ -190,7 +193,9 @@ async function removeWorker(worker) {
         return;
     }
 
-    recordsStatus.textContent = `Deleting ${worker.name}...`;
+    const loadingMessage = `Deleting ${worker.name}'s profile...`;
+    recordsStatus.textContent = loadingMessage;
+    window.loadingIndicator.show(loadingMessage);
 
     try {
         await requestStaff(`${STAFF_API_URL}/${encodeURIComponent(worker._id)}`, {
@@ -205,10 +210,12 @@ async function removeWorker(worker) {
     } catch (error) {
         recordsStatus.textContent = error.message;
         console.error("Failed to delete worker record:", error);
+    } finally {
+        window.loadingIndicator.hide();
     }
 }
 
-window.authReady.then((user) => {
+window.authReady.then(async (user) => {
     window.currentUser = user;
     document.querySelector("#accountInfo").textContent = user.role === "admin"
         ? `Signed in as admin: ${user.username}`
@@ -221,6 +228,7 @@ window.authReady.then((user) => {
     }
 
     document.querySelector("#logoutButton").addEventListener("click", async () => {
+        window.loadingIndicator.show("Signing out...");
         try {
             await window.authFetch("https://sample-company-workforce.onrender.com/api/auth/logout", { method: "POST" });
         } catch (error) {
@@ -231,8 +239,14 @@ window.authReady.then((user) => {
         }
     });
 
-    document.body.hidden = false;
-    loadStaff();
+    document.querySelector("#appContent").hidden = false;
+    try {
+        window.loadingIndicator.show("Loading your workforce...");
+        await loadStaff();
+    } finally {
+        window.loadingIndicator.hide();
+    }
 }).catch((error) => {
+    window.loadingIndicator.fail("We couldn't verify your account. Refresh the page to try again.");
     console.error("Authentication check failed:", error);
 });

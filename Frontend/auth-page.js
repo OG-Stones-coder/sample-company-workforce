@@ -33,10 +33,11 @@ document.querySelectorAll(".authTab").forEach((tab) => {
     });
 });
 
-async function submitAuthentication(endpoint, form, successMessage) {
+async function submitAuthentication(endpoint, form, successMessage, loadingMessage) {
     const submitButton = form.querySelector("button[type='submit']");
     submitButton.disabled = true;
     authStatus.textContent = "Please wait...";
+    window.loadingIndicator.show(loadingMessage);
 
     try {
         const response = await fetch(`${AUTH_API_URL}/${endpoint}`, {
@@ -53,6 +54,7 @@ async function submitAuthentication(endpoint, form, successMessage) {
         authStatus.textContent = successMessage;
         window.location.replace("index.html");
     } catch (error) {
+        window.loadingIndicator.hide();
         authStatus.textContent = error.message;
         console.error("Authentication failed:", error);
     } finally {
@@ -62,27 +64,31 @@ async function submitAuthentication(endpoint, form, successMessage) {
 
 document.querySelector("#adminPanel").addEventListener("submit", (event) => {
     event.preventDefault();
-    submitAuthentication("admin/login", event.currentTarget, "Signed in. Opening your dashboard...");
+    submitAuthentication("admin/login", event.currentTarget, "Signed in. Opening your dashboard...", "Signing in...");
 });
 
 document.querySelector("#staffLoginPanel").addEventListener("submit", (event) => {
     event.preventDefault();
-    submitAuthentication("staff/login", event.currentTarget, "Signed in. Opening your profile...");
+    submitAuthentication("staff/login", event.currentTarget, "Signed in. Opening your profile...", "Signing in...");
 });
 
 document.querySelector("#staffSignupPanel").addEventListener("submit", (event) => {
     event.preventDefault();
-    submitAuthentication("staff/signup", event.currentTarget, "Account created. Opening your profile...");
+    submitAuthentication("staff/signup", event.currentTarget, "Account created. Opening your profile...", "Creating your account...");
 });
 
 if (sessionStorage.getItem("workforceToken")) {
+    window.loadingIndicator.show("Checking your session...");
     fetch(`${AUTH_API_URL}/me`, {
         headers: { Authorization: `Bearer ${sessionStorage.getItem("workforceToken")}` }
     }).then((response) => {
         if (response.ok) {
             window.location.replace("index.html");
+            return;
         }
+        window.loadingIndicator.hide();
     }).catch((error) => {
+        window.loadingIndicator.hide();
         console.error("Failed to check existing login:", error);
     });
 }
